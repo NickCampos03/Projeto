@@ -6,7 +6,7 @@ from backend import criar_exemplo_squad, adicionar_exemplo
 if "dataset_total" not in st.session_state:
     st.session_state.dataset_total = {"data": []}
 
-st.title("🧠 Gerador de Dataset SQuAD")
+st.title("Gerador de Dataset SQuAD")
 
 st.subheader("Adicionar novo exemplo")
 
@@ -17,7 +17,7 @@ resposta = st.text_input("Resposta (deixe vazio se não houver)")
 col1, col2 = st.columns(2)
 
 with col1:
-    if st.button("➕ Adicionar exemplo"):
+    if st.button("Adicionar exemplo"):
         if not contexto or not pergunta:
             st.warning("Preencha contexto e pergunta!")
         else:
@@ -29,20 +29,20 @@ with col1:
                 st.error(str(e))
 
 with col2:
-    if st.button("🗑️ Limpar dataset"):
+    if st.button("Limpar dataset"):
         st.session_state.dataset_total = {"data": []}
         st.success("Dataset limpo!")
 
 st.divider()
 
-st.subheader("📊 Preview do Dataset")
+st.subheader("Preview do Dataset")
 st.json(st.session_state.dataset_total)
 
 st.write(f"Total de exemplos: {len(st.session_state.dataset_total['data'])}")
 
 st.divider()
 
-st.subheader("💾 Exportar")
+st.subheader("Exportar")
 
 json_str = json.dumps(
     st.session_state.dataset_total,
@@ -51,7 +51,7 @@ json_str = json.dumps(
 )
 
 st.download_button(
-    label="⬇️ Baixar dataset_squad.json",
+    label="Baixar dataset_squad.json",
     data=json_str,
     file_name="dataset_squad.json",
     mime="application/json"
