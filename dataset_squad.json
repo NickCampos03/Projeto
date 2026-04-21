@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "title": "exemplo",
+      "paragraphs": [
+        {
+          "context": "Sendo, pois, de duas espécies a virtude, intelectual e moral, a primeira, por via de regra, gera-se e cresce graças ao ensino - por isso requer experiência e tempo; enquanto a virtude moral é adquirida em resultado do hábito, donde ter-se formado o seu nome por uma pequena modificação da palavra (em grego, a vogal 'e' do termo ethos é escrita ora com epsilon, ora com etha, significando respectivamente hábito ou caráter). Por tudo isso, evidencia-se também que nenhuma das virtudes morais surge em nós por natureza; com efeito, nada do que existe naturalmente pode formar um hábito contrário à sua natureza. Por exemplo, à pedra que por natureza se move para baixo não se pode imprimir o hábito de ir para cima, ainda que tentemos adestrá-la jogando-a dez mil vezes no ar; nem se pode habituar o fogo a dirigir-se para baixo, nem qualquer coisa que por natureza se comporte de certa maneira a comportar-se de outra.\nNão é, pois, por natureza, nem contrariando a natureza que as virtudes se geram em nós. Diga-se, antes, que somos adaptados por natureza a recebê-las e nos tornamos perfeitos pelo hábito.\nPor outro lado, de todas as coisas que nos vêm por natureza, primeiro adquirimos a potência e mais tarde exteriorizamos os atos. Isso é evidente no caso dos sentidos, pois não foi por ver ou ouvir frequentemente que adquirimos a visão e a audição, mas, pelo contrário, nós as possuíamos antes de usá-las, e não entramos na posse delas pelo uso. Com as virtudes dá-se exatamente o oposto: adquirimo-las pelo exercício, como também sucede com as artes. Com efeito, as coisas que temos de aprender antes de poder fazê-las, aprendemo-las fazendo; por exemplo, os homens tornam-se arquitetos construindo e tocadores de lira tangendo esse instrumento. Da mesma forma, tornamo-nos justos praticando atos justos, e assim com a temperança, a bravura, etc.\nIsto é confirmado pelo que acontece nos Estados: os legisladores tornam bons os cidadãos por meio de hábitos que lhes incutem. Esse é o propósito de todo legislador, e quem não logra tal desiderato falha no desempenho da sua missão. Nisso, precisamente, reside a diferença entre as boas e as más constituições.\nAinda mais: é das mesmas causas e pelos mesmos meios que se gera e se destrói toda virtude, assim como toda arte: de tocar a lira surgem os bons e os maus músicos. Isso também vale para os arquitetos e todos os demais; construindo bem, tornam-se bons arquitetos; construindo mal, maus. Se não fosse assim não haveria necessidade de mestres, e todos os homens teriam nascido bons ou maus em seu ofício.\nIsso, pois, é o que também ocorre com as virtudes: pelos atos que praticamos em nossas relações com os homens nos tornamos justos ou injustos; pelo que fazemos em presença do perigo e pelo hábito do medo ou da ousadia, nos tornamos valentes ou covardes. O mesmo se pode dizer dos apetites e da emoção da ira: uns se tornam temperantes e calmos, outros intemperantes e irascíveis, portando-se de um modo ou de outro em igualdade de circunstâncias.\nNuma palavra: as diferenças de caráter nascem de atividades semelhantes. É preciso, pois, atentar para a qualidade dos atos que praticamos, porquanto da sua diferença se pode aquilatar a diferença de caracteres. E não é coisa de somenos que desde a nossa juventude nos habituemos desta ou daquela maneira. Tem, pelo contrário, imensa importância, ou melhor: tudo depende disso.",
+          "qas": [
+            {
+              "id": "13e8d497-3daf-4690-99fa-c9f3c474abec",
+              "question": "Quais são as duas espécies de virtude mencionadas no texto?",
+              "answers": [
+                {
+                  "text": "intelectual e moral",
+                  "answer_start": 41
+                }
+              ],
+              "is_impossible": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
