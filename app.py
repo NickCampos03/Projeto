@@ -6,31 +6,82 @@ from backend import criar_exemplo_squad, adicionar_exemplo
 if "dataset_total" not in st.session_state:
     st.session_state.dataset_total = {"data": []}
 
-st.title("🧠 Gerador de Dataset SQuAD")
+if "contador_id" not in st.session_state:
+    st.session_state.contador_id = 1
+
+st.title("Gerador de Dataset SQuAD")
 
 st.subheader("Adicionar novo exemplo")
 
+titulo = st.text_input("Título do Tema")
+
 contexto = st.text_area("Contexto", height=150)
+
 pergunta = st.text_input("Pergunta")
-resposta = st.text_input("Resposta (deixe vazio se não houver)")
+
+is_impossible = st.checkbox("Pergunta impossível")
+
+if not is_impossible:
+    resposta = st.text_input("Resposta")
+    resposta_plausivel = ""
+else:
+    resposta = ""
+    resposta_plausivel = st.text_input(
+        "Resposta plausível (opcional)"
+    )
+
+# Contagem de palavras do contexto
+quantidade_palavras = len(contexto.split())
 
 col1, col2 = st.columns(2)
 
 with col1:
-    if st.button("Adicionar exemplo"):
+    if st.button("Adicionar Pergunta"):
+
         if not contexto or not pergunta:
             st.warning("Preencha contexto e pergunta!")
+
+        elif not titulo:
+            st.warning("Informe um título!")
+
+        elif quantidade_palavras > 350:
+            st.error(
+                f"O contexto possui {quantidade_palavras} palavras. "
+                "O limite é 350 palavras."
+            )
+
+        elif not pergunta.strip().endswith("?"):
+            st.error("A pergunta deve terminar com '?'")
+
         else:
             try:
-                exemplo = criar_exemplo_squad(contexto, pergunta, resposta)
-                adicionar_exemplo(st.session_state.dataset_total, exemplo)
+
+                exemplo = criar_exemplo_squad(
+                    titulo_tema=titulo,
+                    contexto=contexto,
+                    pergunta=pergunta,
+                    resposta=resposta,
+                    is_impossible=is_impossible,
+                    id_contador=st.session_state.contador_id
+                )
+
+                adicionar_exemplo(
+                    st.session_state.dataset_total,
+                    titulo,
+                    exemplo
+                )
+
+                st.session_state.contador_id += 1
+
                 st.success("Exemplo adicionado!")
+
             except ValueError as e:
                 st.error(str(e))
 
 with col2:
     if st.button("Limpar dataset"):
         st.session_state.dataset_total = {"data": []}
+        st.session_state.contador_id = 1
         st.success("Dataset limpo!")
 
 st.divider()
@@ -38,7 +89,15 @@ st.divider()
 st.subheader("Preview do Dataset")
 st.json(st.session_state.dataset_total)
 
-st.write(f"Total de exemplos: {len(st.session_state.dataset_total['data'])}")
+st.write(
+    f"Total de exemplos: "
+    f"{len(st.session_state.dataset_total['data'])}"
+)
+
+st.write(
+    f"Palavras no contexto: "
+    f"{quantidade_palavras}/350"
+)
 
 st.divider()
 
