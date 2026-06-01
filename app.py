@@ -19,9 +19,6 @@ if "dataset_total" not in st.session_state:
         "data": []
     }
 
-if "contador_id" not in st.session_state:
-    st.session_state.contador_id = 1
-
 # ==========================
 # TÍTULO
 # ==========================
@@ -33,7 +30,6 @@ st.title("Gerador de Dataset SQuAD 2.0")
 # ==========================
 
 st.header("Criar Dataset")
-
 
 contexto = st.text_area(
     "Contexto",
@@ -72,10 +68,7 @@ with col1:
 
     if st.button("Adicionar Pergunta"):
 
-        if not titulo:
-            st.warning("Informe um título.")
-
-        elif not contexto:
+        if not contexto:
             st.warning("Informe um contexto.")
 
         elif not pergunta:
@@ -87,7 +80,7 @@ with col1:
                 "Limite: 350."
             )
 
-        elif not pergunta.endswith("?"):
+        elif not pergunta.strip().endswith("?"):
             st.error(
                 "A pergunta deve terminar com '?'"
             )
@@ -97,38 +90,16 @@ with col1:
             try:
 
                 exemplo = criar_exemplo_squad(
-                    titulo_tema=titulo,
                     contexto=contexto,
                     pergunta=pergunta,
                     resposta=resposta,
-                    is_impossible=is_impossible,
-                    id_contador=st.session_state.contador_id
+                    resposta_plausivel=resposta_plausivel
                 )
-
-                if (
-                    is_impossible
-                    and resposta_plausivel.strip()
-                ):
-
-                    exemplo["qas"][0][
-                        "plausible_answers"
-                    ].append(
-                        {
-                            "text": resposta_plausivel,
-                            "answer_start":
-                            contexto.find(
-                                resposta_plausivel
-                            )
-                        }
-                    )
 
                 adicionar_exemplo(
                     st.session_state.dataset_total,
-                    titulo,
                     exemplo
                 )
-
-                st.session_state.contador_id += 1
 
                 st.success(
                     "Pergunta adicionada."
@@ -146,8 +117,6 @@ with col2:
             "data": []
         }
 
-        st.session_state.contador_id = 1
-
         st.success("Dataset limpo.")
 
 # ==========================
@@ -162,20 +131,17 @@ st.json(
     st.session_state.dataset_total
 )
 
-total_contextos = 0
+total_contextos = len(
+    st.session_state.dataset_total["data"]
+)
+
 total_perguntas = 0
 
-for topico in st.session_state.dataset_total["data"]:
+for contexto_item in st.session_state.dataset_total["data"]:
 
-    total_contextos += len(
-        topico["paragraphs"]
+    total_perguntas += len(
+        contexto_item["qas"]
     )
-
-    for p in topico["paragraphs"]:
-
-        total_perguntas += len(
-            p["qas"]
-        )
 
 st.write(
     f"Contextos: {total_contextos}"
@@ -265,10 +231,8 @@ if st.button("Executar Merge"):
 
                 caminho_novo = f2.name
 
-            caminho_saida = (
-                tempfile.mktemp(
-                    suffix=".json"
-                )
+            caminho_saida = tempfile.mktemp(
+                suffix=".json"
             )
 
             fazer_merge_squad(
