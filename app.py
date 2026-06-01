@@ -34,10 +34,6 @@ st.title("Gerador de Dataset SQuAD 2.0")
 
 st.header("Criar Dataset")
 
-titulo = st.text_input(
-    "Título do Tema",
-    placeholder="Ex: História do Brasil"
-)
 
 contexto = st.text_area(
     "Contexto",
